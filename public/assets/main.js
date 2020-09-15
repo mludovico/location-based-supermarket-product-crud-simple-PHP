@@ -40,43 +40,27 @@
     return productsData;
   }
 
-  function getLocations() {
-    let ajax = new XMLHttpRequest();
-    let LocationsData;
-    ajax.open('GET', '/locations/json', false);
-    ajax.onreadystatechange = function () {
-      if(ajax.readyState === 4 && ajax.status === 200){
-        LocationsData = JSON.parse(ajax.responseText);
-      }
-    }
-    ajax.send();
-    return LocationsData;
-  }
-
   function updateTable() {
-    let table = document.querySelector('table tbody');
+    let tableBody = document.querySelector('table tbody');
     let row;
     let productsData = getProducts();
-    let locationsData = getLocations();
-    console.log(locationsData);
+    // tableBody.innerHTML = '';
     productsData.forEach(item=>{
       console.log(item);
-      let idcell = document.createElement('td');
-      idcell.scope = 'col';
-      idcell.innerText = item.id;
-      let locationcell = document.createElement('td');
-      locationcell.scope = 'col';
-      locationcell.innerText = locationsData.filter((lData)=>{
-        lData.id == item.id_location
-      });
+      let nameCell = document.createElement('td');
+      nameCell.scope = 'col';
+      nameCell.innerText = item.name;
+      let locationCell = document.createElement('td');
+      locationCell.scope = 'col';
+      locationCell.innerText = item.location;
       let editBtn = document.createElement('button');
-      editBtn.className = 'btn btn-primary btn-sm pr-3 pl-3';
+      editBtn.className = 'btn btn-sm btn-primary pl-3 pr-3';
       editBtn.innerText = 'Editar';
       let editA = document.createElement('a');
       editA.href = 'products/' + item.id + '/edit';
       editA.appendChild(editBtn);
       let removeBtn = document.createElement('button');
-      removeBtn.className = 'btn btn-danger btn-sm';
+      removeBtn.className = 'btn btn-sm btn-danger';
       removeBtn.innerText = 'Remover';
       let removeA = document.createElement('a');
       removeA.href = '/products/' + item.id;
@@ -87,14 +71,14 @@
       actioncell.appendChild(editA);
       actioncell.appendChild(removeA);
       row = document.createElement('tr');
-      row.appendChild(idcell);
-      row.appendChild(locationcell);
+      row.appendChild(nameCell);
+      row.appendChild(locationCell);
       row.appendChild(actioncell);
+      tableBody.appendChild(row);
     });
-    table.appendChild(row);
   }
 
   if(document.querySelector('.table')){
-    //setInterval(updateTable, 2000);
+    setInterval(updateTable, 2000);
   }
 })(window, document);

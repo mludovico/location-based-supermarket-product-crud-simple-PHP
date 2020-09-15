@@ -100,4 +100,9 @@ class ProductController extends Controller
       $deleted = $this->ProductObj->destroy($id);
       return $deleted ? "OK deleting Product $id" : "FAIL deleting Product $id";
     }
+
+    public function getData()
+    {
+      return json_encode($this->ProductObj->all());
+    }
 }

@@ -19,3 +19,4 @@ Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{id}/edit', [ProductController::class, 'edit']);
 Route::post('/products/{id}', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+Route::get('/products/json', [ProductController::class, 'getData']);
