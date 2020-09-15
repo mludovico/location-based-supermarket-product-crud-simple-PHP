@@ -93,6 +93,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleted = $this->ProductObj->destroy($id);
+      return $deleted ? "OK deleting Product $id" : "FAIL deleting Product $id";
     }
 }

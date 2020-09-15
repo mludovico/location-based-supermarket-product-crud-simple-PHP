@@ -95,6 +95,6 @@
   }
 
   if(document.querySelector('.table')){
-    setInterval(updateTable, 2000);
+    //setInterval(updateTable, 2000);
   }
 })(window, document);
