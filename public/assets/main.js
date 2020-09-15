@@ -44,7 +44,7 @@
     let tableBody = document.querySelector('table tbody');
     let row;
     let productsData = getProducts();
-    // tableBody.innerHTML = '';
+    tableBody.innerHTML = '';
     productsData.forEach(item=>{
       console.log(item);
       let nameCell = document.createElement('td');
