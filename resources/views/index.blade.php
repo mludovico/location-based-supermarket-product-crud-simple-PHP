@@ -18,25 +18,11 @@
   @endphp
     <form name="formCadastro" method="post" action="{{url($url)}}" id="formCadastro">
       @csrf
-      <label for="product">Produto</label>
-      <input type="text" class="form-control" name="product" placeholder="Ex: Arroz Branco" value="{{$edit ? $product->name : ''}}" required>
+      <label for="name">Produto</label>
+      <input type="text" class="form-control" name="name" placeholder="Ex: Arroz Branco" value="{{$edit ? $product->name : ''}}" required>
       <label for="location">Localização</label>
-      <select name="location" class="form-control" id="location">
-        <option value="{{$edit ? $product->relLocation->id : NULL}}">
-          {{$edit ? $product->relLocation->aisle.$product->relLocation->shelf.$product->relLocation->side : 'Corredor/Prateleira/Lado'}}
-        </option>
-        @foreach($locations as $location)
-          <option value="{{$location->id}}">{{$location->aisle}}{{$location->shelf}}{{$location->side}}</option>
-        @endforeach
-      </select>
-      <a href="{{url('locations')}}">
-        <button class="btn btn-sm btn-dark mt-2 mb-3" type="button">GERENCIAR LOCALIZAÇÕES</button>
-      </a>
+      <input type="text" class="form-control" name="location" placeholder="Ex: A1D" value="{{$edit ? $product->location : ''}}" required>
       <br>
-      <label for="description">Descrição</label>
-      <input type="text" class="form-control" name="description" placeholder="Ex: Arroz tipo 1 parbolizado 1Kg" value="{{$edit ? $product->description : ''}}" required>
-      <label for="price">Preço</label>
-      <input type="text" class="form-control" name="price" placeholder="Ex: 12.90" value="{{$edit ? $product->price : ''}}" required>
       <div class="col-8 m-auto text-center">
         @if($edit)
         <a href="/products">
@@ -64,7 +50,7 @@
             @php
               $location = $product->find($product->id)->relLocation
             @endphp
-            <td scope="col">{{$location->aisle}}{{$location->shelf}}{{$location->side}}</td>
+            <td scope="col">{{$product->location}}</td>
             <td scope="col">
               <a href="{{url("products/$product->id/edit")}}">
                 <button class="btn btn-sm btn-primary pl-3 pr-3">Editar</button>

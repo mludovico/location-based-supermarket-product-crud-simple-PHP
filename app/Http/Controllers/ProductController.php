@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\ProductRequest;
+use App\Http\Requests\ProductRequest;
 use App\Models\Models\Product;
 
 class ProductController extends Controller
 {
+  private $ProductObj;
+
+  public function __construct()
+  {
+    $this->ProductObj = new Product();
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+      $products = $this->ProductObj->all();
+        return view('index', compact('products'));
     }
 
     /**
@@ -35,7 +43,11 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        //
+      $this->ProductObj->create([
+        'name'=>$request->name,
+        'location'=>$request->location
+      ]);
+      return redirect('/');
     }
 
     /**
@@ -57,7 +69,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+      $product = $this->ProductObj->find($id);
+      return view('index', compact('product'));
     }
 
     /**

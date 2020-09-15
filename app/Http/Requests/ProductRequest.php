@@ -13,7 +13,7 @@ class ProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,16 @@ class ProductRequest extends FormRequest
     {
         return [
           'name'=>'required',
-          'location'=>'required|regex:/^[A-z][0-9][A-z]$/',
+          'location'=>'required|regex:/^[A-z][0-9][E,e,D,D]$/',
         ];
+    }
+
+    public function messages()
+    {
+      return [
+        'name.required'=>'Preencha o nome do produto.',
+        'location.required'=>'Preecha a localização do produto.',
+        'location.regex'=>'Formato da localização inválido. Tente no formaro A1E [Corredor A-Z, prateleira 0-9, lado E ou D].'
+      ];
     }
 }
