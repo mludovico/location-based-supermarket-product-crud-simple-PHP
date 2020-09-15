@@ -46,7 +46,6 @@
     let productsData = getProducts();
     tableBody.innerHTML = '';
     productsData.forEach(item=>{
-      console.log(item);
       let nameCell = document.createElement('td');
       nameCell.scope = 'col';
       nameCell.innerText = item.name;
@@ -57,14 +56,14 @@
       editBtn.className = 'btn btn-sm btn-primary pl-3 pr-3';
       editBtn.innerText = 'Editar';
       let editA = document.createElement('a');
-      editA.href = 'products/' + item.id + '/edit';
+      editA.href = window.location.href + '/' + item.id + '/edit';
       editA.appendChild(editBtn);
       let removeBtn = document.createElement('button');
       removeBtn.className = 'btn btn-sm btn-danger';
       removeBtn.innerText = 'Remover';
       let removeA = document.createElement('a');
-      removeA.href = '/products/' + item.id;
-      removeA.className = 'js-del';
+      removeA.href = window.location.href + '/' +  item.id;
+      removeA.className = 'js-del ml-1';
       removeA.appendChild(removeBtn);
       let actioncell = document.createElement('td');
       actioncell.scope = 'col';
